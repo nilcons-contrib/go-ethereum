@@ -16,9 +16,7 @@ for pkg in $(go list ./...); do
     # drop the namespace prefix.
     dir=${pkg##github.com/ethereum/go-ethereum/}
     
-    if [[ $dir != "tests" ]]; then
-        go test -covermode=count -coverprofile=$dir/profile.tmp $pkg
-    fi
+    go test -covermode=count -coverprofile=$dir/profile.tmp $pkg
     if [[ -f $dir/profile.tmp ]]; then
         tail -n +2 $dir/profile.tmp >> profile.cov
         rm $dir/profile.tmp
