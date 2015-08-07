@@ -660,12 +660,12 @@ func (self *Ethereum) StartAutoDAG() {
 				thisEpoch := currentBlock / epochLength
 				if nextEpoch <= thisEpoch {
 					if currentBlock%epochLength > autoDAGepochHeight {
-						if thisEpoch > 0 {
-							previousDag, previousDagFull := dagFiles(thisEpoch - 1)
-							os.Remove(filepath.Join(ethash.DefaultDir, previousDag))
-							os.Remove(filepath.Join(ethash.DefaultDir, previousDagFull))
-							glog.V(logger.Info).Infof("removed DAG for epoch %d (%s)", thisEpoch-1, previousDag)
-						}
+						// if thisEpoch > 0 {
+						// 	previousDag, previousDagFull := dagFiles(thisEpoch - 1)
+						// 	os.Remove(filepath.Join(ethash.DefaultDir, previousDag))
+						// 	os.Remove(filepath.Join(ethash.DefaultDir, previousDagFull))
+						// 	glog.V(logger.Info).Infof("removed DAG for epoch %d (%s)", thisEpoch-1, previousDag)
+						// }
 						nextEpoch = thisEpoch + 1
 						dag, _ := dagFiles(nextEpoch)
 						if _, err := os.Stat(dag); os.IsNotExist(err) {
